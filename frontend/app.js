@@ -5,9 +5,9 @@
 // ─── Config ────────────────────────────────────────────────────────────────
 // Replace these with your actual deployed worker URLs after deployment
 const WORKER_URLS = {
-  bidsandtenders: 'https://ottawa-tenders-bidsandtenders.YOUR_SUBDOMAIN.workers.dev',
-  biddingo:       'https://ottawa-tenders-biddingo.YOUR_SUBDOMAIN.workers.dev',
-  municipal:      'https://ottawa-tenders-municipal.YOUR_SUBDOMAIN.workers.dev',
+  bidsandtenders: 'ottawa-tenders-bidsandtenders.jnterada.workers.dev',
+  biddingo:       'ottawa-tenders-biddingo.jnterada.workers.dev',
+  municipal:      'ottawa-tenders-municipal.jnterada.workers.dev',
 };
 
 const CLOSING_SOON_DAYS = 7;
