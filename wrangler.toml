@@ -1,0 +1,50 @@
+# wrangler.toml
+# Cloudflare Workers configuration for Ottawa Tenders
+# Deploy all workers with: wrangler deploy --config wrangler.toml
+
+# ─── Worker 1: bids&tenders.ca ───────────────────────────────────────────────
+[[workers]]
+name = "ottawa-tenders-bidsandtenders"
+main = "workers/bidsandtenders/index.js"
+compatibility_date = "2024-01-01"
+
+[[workers.triggers.crons]]
+crons = ["0 11 * * *"]   # Daily at 6:00 AM ET (11:00 UTC)
+
+[[workers.kv_namespaces]]
+binding = "TENDERS_KV"
+id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"   # Fill in after step 3 in README
+
+# ─── Worker 2: Biddingo ───────────────────────────────────────────────────────
+[[workers]]
+name = "ottawa-tenders-biddingo"
+main = "workers/biddingo/index.js"
+compatibility_date = "2024-01-01"
+
+[[workers.triggers.crons]]
+crons = ["15 11 * * *"]  # Daily at 6:15 AM ET (staggered to avoid overlap)
+
+[[workers.kv_namespaces]]
+binding = "TENDERS_KV"
+id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"   # Same KV namespace as above
+
+# ─── Worker 3: Municipal websites ─────────────────────────────────────────────
+[[workers]]
+name = "ottawa-tenders-municipal"
+main = "workers/municipal/index.js"
+compatibility_date = "2024-01-01"
+
+[[workers.triggers.crons]]
+crons = ["30 11 * * *"]  # Daily at 6:30 AM ET (staggered)
+
+[[workers.kv_namespaces]]
+binding = "TENDERS_KV"
+id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"   # Same KV namespace as above
+
+# ─── Environment Variables ─────────────────────────────────────────────────────
+# Set these in Cloudflare Dashboard → Workers → Settings → Environment Variables
+# Do NOT put real values in this file — keep secrets out of GitHub
+#
+# DIGEST_EMAIL_TO    = "your@email.com"
+# DIGEST_EMAIL_FROM  = "tenders@yourdomain.com"
+# SENDGRID_API_KEY   = "SG.xxxx"   (or Mailgun / Resend — see README)
