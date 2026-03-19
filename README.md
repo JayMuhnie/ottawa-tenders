@@ -84,9 +84,10 @@ This worker scrapes all 14 bids&tenders.ca subdomains.
 2. Click **Create Worker**
 3. Name it exactly: `ottawa-tenders-bidsandtenders`
 4. You'll see a code editor with some sample code — **select all of it and delete it**
-5. Open the file `workers/bidsandtenders/index.js` from your extracted zip in any text editor (Notepad, TextEdit, VS Code, anything)
-6. Select all the text, copy it, and paste it into the Cloudflare code editor
-7. Click **Deploy**
+5. Open the file `workers/worker-bidsandtenders.js` from your extracted zip in TextEdit
+6. Press **Cmd+A** to select all, **Cmd+C** to copy, then paste into the Cloudflare code editor
+7. **Important:** Look for a small dropdown near the top of the editor that says **"Service Worker"** — click it and change it to **"ES Module"**. This must be set before deploying.
+8. Click **Deploy**
 
 **Now connect it to KV storage:**
 
@@ -116,7 +117,7 @@ This worker scrapes City of Kingston and Township of South Frontenac.
 2. Click **Create Worker**
 3. Name it exactly: `ottawa-tenders-biddingo`
 4. Select all sample code and delete it
-5. Open `workers/biddingo/index.js`, copy all the text, paste it into the editor
+5. Open `workers/worker-biddingo.js`, copy all the text, paste it into the editor
 6. Click **Deploy**
 
 **Connect to KV storage:**
@@ -145,7 +146,7 @@ This worker scrapes the 17 municipalities that post tenders on their own website
 2. Click **Create Worker**
 3. Name it exactly: `ottawa-tenders-municipal`
 4. Select all sample code and delete it
-5. Open `workers/municipal/index.js`, copy all the text, paste it into the editor
+5. Open `workers/worker-municipal.js`, copy all the text, paste it into the editor
 6. Click **Deploy**
 
 **Connect to KV storage:**

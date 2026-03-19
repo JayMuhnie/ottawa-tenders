@@ -268,24 +268,22 @@ async function runScrape(env) {
 }
 
 // ─── Worker entry point ──────────────────────────────────────
-addEventListener('scheduled', event => {
-  event.waitUntil(runScrape(event));
-});
+export default {
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(runScrape(env));
+  },
 
-addEventListener('fetch', event => {
-  event.respondWith(handleRequest(event.request, event));
-});
-
-async function handleRequest(request, event) {
-  const url = new URL(request.url);
-  const headers = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
-  if (url.pathname === '/refresh') {
-    event.waitUntil(runScrape(event));
-    return new Response(JSON.stringify({ ok: true, message: 'Municipal scrape triggered' }), { headers });
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+    const headers = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
+    if (url.pathname === '/refresh') {
+      ctx.waitUntil(runScrape(env));
+      return new Response(JSON.stringify({ ok: true, message: 'Municipal scrape triggered' }), { headers });
+    }
+    if (url.pathname === '/tenders') {
+      const data = await env.TENDERS_KV.get(KV_KEY, 'json');
+      return new Response(JSON.stringify(data || []), { headers });
+    }
+    return new Response('TenderWatch — Municipal worker running.', { status: 200 });
   }
-  if (url.pathname === '/tenders') {
-    const data = await event.env.TENDERS_KV.get(KV_KEY, 'json');
-    return new Response(JSON.stringify(data || []), { headers });
-  }
-  return new Response('TenderWatch — Municipal worker running.', { status: 200 });
-}
+};
