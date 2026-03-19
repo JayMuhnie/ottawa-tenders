@@ -13,7 +13,7 @@ crons = ["0 11 * * *"]   # Daily at 6:00 AM ET (11:00 UTC)
 
 [[workers.kv_namespaces]]
 binding = "TENDERS_KV"
-id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"   # Fill in after step 3 in README
+id = "46d1bcb02d0f454aa337b16f018a4b3d"   # Fill in after step 3 in README
 
 # ─── Worker 2: Biddingo ───────────────────────────────────────────────────────
 [[workers]]
@@ -26,7 +26,7 @@ crons = ["15 11 * * *"]  # Daily at 6:15 AM ET (staggered to avoid overlap)
 
 [[workers.kv_namespaces]]
 binding = "TENDERS_KV"
-id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"   # Same KV namespace as above
+id = "46d1bcb02d0f454aa337b16f018a4b3d"   # Same KV namespace as above
 
 # ─── Worker 3: Municipal websites ─────────────────────────────────────────────
 [[workers]]
@@ -39,7 +39,7 @@ crons = ["30 11 * * *"]  # Daily at 6:30 AM ET (staggered)
 
 [[workers.kv_namespaces]]
 binding = "TENDERS_KV"
-id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"   # Same KV namespace as above
+id = "46d1bcb02d0f454aa337b16f018a4b3d"   # Same KV namespace as above
 
 # ─── Environment Variables ─────────────────────────────────────────────────────
 # Set these in Cloudflare Dashboard → Workers → Settings → Environment Variables
